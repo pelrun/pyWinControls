@@ -20,7 +20,7 @@ This is the joystick configuration (note, wincontrols itself gets Y and right cl
 01 a521 5ade 00 0000 5200 5100 5000 4f00 0400 0500 1b00 1c00 000000000000000000
                      LU   LD   LL   LR   LC   RC
 01 a521 5ade 00 0100 1a00 1600 0400 0700 2c00 1c00 00000000000000000000000000
-                          (unknown - are these the shoulder mouse click settings?)
+                          L1   R1   L2   R2 
 01 a521 5ade 00 0200 0000 ea00 eb00 ec00 ed00 000000000000000000000000000000
 
                      L41  L42  L43  L44  R41  R42  R43
@@ -28,10 +28,20 @@ This is the joystick configuration (note, wincontrols itself gets Y and right cl
                      R44  Rumb (win4 led?) LC LB RC RB (signed)
 01 a521 5ade 00 0400 0000 0100 0000 0000   f7 f7 f7 f7 00000000000000000000000000
 
-macro delays here - 3x words before each 0x012c First set is L4 second set is R4, in milliseconds
+macro delays here - 4x words per set First set is L4 second set is R4, in milliseconds
 0x0064 is 100 - wincontrols only allows setting 0 or 100
-0x012c is 300 - is this the between-keypress delay? Will zeroing it improve hold behaviour?
+0x012c is 300 - wincontrols doesn't allow changing this
+But all 4 can be changed arbitrarily.
 01 a521 5ade 00 0500 6400 6400 6400 2c01 6400 6400 6400 2c01 000000000000000000
+
+The config does not exactly follow the usb hid scancodes; these are different:
+
+0xea - left mouse
+0xeb - right mouse
+0xec - middle mouse
+0xed - mouse fast 
+
+these can be assigned to any key, not just the shoulders!
 
 Nothing in these
 01 a521 5ade 00 0600 00000000000000000000000000000000000000000000000000
