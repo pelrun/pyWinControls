@@ -8,7 +8,7 @@ import json
 class WinControls(object):
 
     # Somewhat sane default config
-    config={
+    defaults={
         'left': [0x52,0x51,0x50,0x4f],
         'abxy': [0x4,0x5,0x1b,0x1c],
         'dpad': [0x1a,0x16,0x4,0x7],
@@ -160,10 +160,15 @@ if __name__ == "__main__":
 
     parser.add_option("-s","--set",help="Read config from FILE",metavar="FILE")
     parser.add_option("-d","--dump",help="Dump config to FILE", metavar="FILE")
+    parser.add_option("-r","--reset",action="store_true",help="Reset to defaults")
 
     (options,args)=parser.parse_args()
 
     wc = WinControls()
+
+    if options.reset:
+        wc.setConfig(wc.defaults)
+        wc.writeConfig(generate=True)
 
     if wc.loaded and options.dump:
         with open(options.dump,"w") as wf:
@@ -175,5 +180,5 @@ if __name__ == "__main__":
         if wc.setConfig(newconfig):
             wc.writeConfig(generate=True)
 
-    if not options.dump and not options.set:
+    if not options.reset and not options.dump and not options.set:
         print(json.dumps(wc.config, indent=4))
