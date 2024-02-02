@@ -10,8 +10,8 @@ class WinControls(object):
     # Somewhat sane default config
     config={
         'left': [0x52,0x51,0x50,0x4f],
-        'dpad': [0x4,0x5,0x1b,0x1c],
-        'abxy': [0x1a,0x16,0x4,0x7],
+        'abxy': [0x4,0x5,0x1b,0x1c],
+        'dpad': [0x1a,0x16,0x4,0x7],
         'clicks': [0x2c,0x28],
         'l4': [0,0,0,0],
         'l4delay': [0,0,0,300],
@@ -26,9 +26,9 @@ class WinControls(object):
 
     # Parsing information for binary data
     _configStruct = {
-        'left': ("<HHHH",8),
         'dpad': ("<HHHH",0),
-        'abxy': ("<HHHH",16),
+        'abxy': ("<HHHH",8),
+        'left': ("<HHHH",16),
         'clicks': ("<HH",24),
         'shoulder': ("<HHHH",34),
         'l4': ("<HHHH",50),
@@ -48,7 +48,7 @@ class WinControls(object):
             self.readConfig()
 
     def resetConfig(self):
-        self._configRaw = bytearray()
+        self._configRaw = bytearray(256)
         self.loaded = False
 
     def _openHid(self):
@@ -100,13 +100,14 @@ class WinControls(object):
 
         self.resetConfig()
 
+        self._configRaw = bytearray()
         for addr in range(4):
             self._configRaw.extend(self._sendReq(0x11,[addr]))
 
         self._response = self._sendReq(0x12)
         if self._parseResponse(self._response)[3] == self._checksum():
-            self.loaded = True
             self.config = self._parseConfig()
+            self.loaded = True
         else:
             raise RuntimeError("Checksum error reading config")
 
