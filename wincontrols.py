@@ -54,7 +54,7 @@ class WinControls(object):
     def _openHid(self):
         for dev in hid.enumerate(vid=0x2f24):
             if dev['usage_page'] == 0xff00:
-                print(dev['path'])
+                #print(dev['path'])
                 self.device = hid.Device(path=dev['path'])
                 break
         if not self.device:
@@ -89,10 +89,10 @@ class WinControls(object):
 
         self.device.send_feature_report(bytes(result))
 
-        print("Sent: %s" % result.hex())
+        #print("Sent: %s" % result.hex())
         if (id != 0x21 and id != 0x23): # writes don't have replies
             result = self.device.get_input_report(1,65)
-            print("Recv: %s" % result.hex())
+            #print("Recv: %s" % result.hex())
             return result
 
     def readConfig(self):
