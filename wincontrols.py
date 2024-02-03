@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # %%
 import hid
 import struct
@@ -38,7 +40,7 @@ class WinControls(object):
         'deadzone_l': ("<bb",72),
         'deadzone_r': ("<bb",74),
         'rumble': ("<H",66),
-        'leds': ("<HH",68),
+        'leds': ("<BH",68),
     }
 
     def __init__(self, read=True):
@@ -71,8 +73,12 @@ class WinControls(object):
 
     def _checkDevice(self):
         info = self._parseResponse(self._response)
-        if info[1] != 0x1005 or info[2] != 0x0405:
-            raise RuntimeError("Only GPD Win Mini X510K504 is currently supported")
+        if info[1] == 0x1005 or info[2] == 0x0405:
+            return
+        if info[1] == 0x0804 or info[2] == 0x0704:
+            return
+        #print(info)
+        raise RuntimeError("Only GPD Win Mini X510K504 or Win 4 X408K407 is currently supported")
 
     def _waitReady(self, id):
         self._response = None
