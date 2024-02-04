@@ -6,7 +6,7 @@ Shoulder buttons can be reassigned, and mouse clicks can be put anywhere.
 
 Delay between macro keystrokes can be changed arbitrarily, and the fixed 300ms delay after the end of the macro can be changed.
 
-Many more keys can be assigned to buttons, not just ones that are already available.
+Many more keys can be assigned to buttons, not just ones you can already press.
 
 ## Usage:
 
