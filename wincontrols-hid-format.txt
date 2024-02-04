@@ -1,3 +1,5 @@
+Must be sent to usb device 2f24:0135, on the interface with usage page 0xff00.
+
 01 a520 5adf 00 000000000000000000000000000000000000000000000000000000
 01 a521 5ade 00 00005200510050004f00040005001b001c00000000000000000000
 01 a521 5ade 00 01001a001600040007002c00280000000000000000000000000000
@@ -25,8 +27,15 @@ This is the joystick configuration (note, wincontrols itself gets Y and right cl
 
                      L41  L42  L43  L44  R41  R42  R43
 01 a521 5ade 00 0300 0000 0400 0000 0000 0000 1b00 0000 0000000000000000000000
-                     R44  Rumb (win4 led?) LC LB RC RB (signed)
-01 a521 5ade 00 0400 0000 0100 0000 0000   f7 f7 f7 f7 00000000000000000000000000
+                     R44  Rumb LED Colour    LC LB RC RB (signed)
+01 a521 5ade 00 0400 0000 0100 00  0000   00 f7 f7 f7 f7 00000000000000000000000000
+
+LED (win4 only):
+lower nybble: 1 on, 2 off
+upper nybble: 0 constant, 1 breathing, 2 rotating
+
+Colour (win4 only):
+seems like RGB565, but only the high bits actually have an effect?
 
 macro delays here - 4x words per set First set is L4 second set is R4, in milliseconds
 0x0064 is 100 - wincontrols only allows setting 0 or 100
@@ -34,12 +43,13 @@ macro delays here - 4x words per set First set is L4 second set is R4, in millis
 But all 4 can be changed arbitrarily.
 01 a521 5ade 00 0500 6400 6400 6400 2c01 6400 6400 6400 2c01 000000000000000000
 
-The config does not exactly follow the usb hid scancodes; these are different:
-
+The config uses standard usb hid keycodes up to 0xe7, after that are the following:
+0xe8 - mousewheel up
+0xe9 - mousewheel down
 0xea - left mouse
 0xeb - right mouse
 0xec - middle mouse
-0xed - mouse fast 
+0xed - mouse fast move
 
 these can be assigned to any key, not just the shoulders!
 

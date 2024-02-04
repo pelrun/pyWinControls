@@ -176,26 +176,12 @@ typedef enum <uint16> {
     KEY_RIGHTALT = 0xe6,
     KEY_RIGHTMETA = 0xe7,
 
-    KEY_MEDIA_PLAYPAUSE = 0xe8,
-    KEY_MEDIA_STOPCD = 0xe9,
-    KEY_MEDIA_PREVIOUSSONG = 0xea,
-    KEY_MEDIA_NEXTSONG = 0xeb,
-    KEY_MEDIA_EJECTCD = 0xec,
-    KEY_MEDIA_VOLUMEUP = 0xed,
-    KEY_MEDIA_VOLUMEDOWN = 0xee,
-    KEY_MEDIA_MUTE = 0xef,
-    KEY_MEDIA_WWW = 0xf0,
-    KEY_MEDIA_BACK = 0xf1,
-    KEY_MEDIA_FORWARD = 0xf2,
-    KEY_MEDIA_STOP = 0xf3,
-    KEY_MEDIA_FIND = 0xf4,
-    KEY_MEDIA_SCROLLUP = 0xf5,
-    KEY_MEDIA_SCROLLDOWN = 0xf6,
-    KEY_MEDIA_EDIT = 0xf7,
-    KEY_MEDIA_SLEEP = 0xf8,
-    KEY_MEDIA_COFFEE = 0xf9,
-    KEY_MEDIA_REFRESH = 0xfa,
-    KEY_MEDIA_CALC = 0xfb
+    KEY_MOUSE_SCROLLUP = 0xe8,
+    KEY_MEDIA_SCROLLDOWN = 0xe9,
+    KEY_MOUSE_LEFT = 0xea,
+    KEY_MOUSE_RIGHT = 0xeb,
+    KEY_MOUSE_MIDDLE = 0xec,
+    KEY_MOUSE_FAST = 0xed,
 } Key;
 
 struct {
