@@ -69,9 +69,9 @@ class WinControls(object):
         Millis(94,'r4delay4'),
     ]
 
-    def __init__(self, read=True):
-        self.field = {f.name: f for f in self._fields}
+    field = {f.name: f for f in _fields}
 
+    def __init__(self, read=True):
         self._openHid()
         self.loaded = False
         if read:
@@ -172,7 +172,10 @@ class WinControls(object):
             raise RuntimeError("Checksum error writing config")
 
     def setConfig(self, config):
-        for line in config.split("\n"):
+        if type(config) == str:
+            config = config.split("\n")
+
+        for line in config:
             if line == "" or line.startswith("#"):
                 continue
             if "=" not in line:
