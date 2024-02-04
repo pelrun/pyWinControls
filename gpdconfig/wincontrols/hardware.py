@@ -6,67 +6,69 @@ from .config import *
 from . import hid
 
 class WinControls(object):
+    """Class for reading and writing configuration to the GPD Win controller hardware."""
 
+    # Map of fields and their offsets in the binary configuration
     _fields = [
         # left stick
-        Key(16,'lu'),
-        Key(18,'ld'),
-        Key(20,'ll'),
-        Key(22,'lr'),
+        Key(16,'lu','left stick up'),
+        Key(18,'ld','left stick down'),
+        Key(20,'ll','left stick left'),
+        Key(22,'lr','left stick right'),
 
         # dpad
-        Key(0,'du'),
-        Key(2,'dd'),
-        Key(4,'dl'),
-        Key(6,'dr'),
+        Key(0,'du','dpad up'),
+        Key(2,'dd','dpad down'),
+        Key(4,'dl','dpad left'),
+        Key(6,'dr','dpad right'),
 
         # ABXY
-        Key(8,'a'),
-        Key(10,'b'),
-        Key(12,'x'),
-        Key(14,'y'),
+        Key(8,'a','A button'),
+        Key(10,'b','B button'),
+        Key(12,'x','X button'),
+        Key(14,'y','Y button'),
 
         # shoulder buttons
-        Key(34,'l1'),
-        Key(36,'r1'),
+        Key(34,'l1','L1 shoulder button'),
+        Key(36,'r1','R1 shoulder button'),
 
-        Key(38,'l2'),
-        Key(40,'r2'),
+        Key(38,'l2','L2 trigger'),
+        Key(40,'r2','R2 trigger'),
 
         # stick clicks
-        Key(24,'l3'),
-        Key(26,'r3'),
+        Key(24,'l3','left stick click'),
+        Key(26,'r3','right stick click'),
 
         # macro keys
-        Key(50,'l41'),
-        Key(52,'l42'),
-        Key(54,'l43'),
-        Key(56,'l44'),
+        Key(50,'l41','L4 macro key 1'),
+        Key(52,'l42','L4 macro key 2'),
+        Key(54,'l43','L4 macro key 3'),
+        Key(56,'l44','L4 macro key 4'),
 
-        Key(58,'r41'),
-        Key(60,'r42'),
-        Key(62,'r43'),
-        Key(64,'r44'),
+        Key(58,'r41','R4 macro key 1'),
+        Key(60,'r42','R4 macro key 2'),
+        Key(62,'r43','R4 macro key 3'),
+        Key(64,'r44','R4 macro key 4'),
 
-        Rumble(66,'rumble'),
-        LedMode(68,'ledmode'),
-        Colour(69,'colour'),
+        Rumble(66,'rumble','Rumble'),
+        LedMode(68,'ledmode','LED mode'),
+        Colour(69,'colour','LED colour'),
 
         # deadzone and centering
-        Signed(72,'ldead'),
-        Signed(73,'lcent'),
-        Signed(74,'rdead'),
-        Signed(75,'rcent'),
+        Signed(72,'ldead','Left stick deadzone'),
+        Signed(73,'lcent','Left stick centering'),
+        Signed(74,'rdead','Right stick deadzone'),
+        Signed(75,'rcent','Right stick centering'),
 
         # macro delays
-        Millis(80,'l4delay1'),
-        Millis(82,'l4delay2'),
-        Millis(84,'l4delay3'),
-        Millis(86,'l4delay4'),
-        Millis(88,'r4delay1'),
-        Millis(90,'r4delay2'),
-        Millis(92,'r4delay3'),
-        Millis(94,'r4delay4'),
+        Millis(80,'l4delay1','L4 macro delay 1'),
+        Millis(82,'l4delay2','L4 macro delay 2'),
+        Millis(84,'l4delay3','L4 macro delay 3'),
+        Millis(86,'l4delay4','L4 macro delay 4'),
+        Millis(88,'r4delay1','R4 macro delay 1'),
+        Millis(90,'r4delay2','R4 macro delay 2'),
+        Millis(92,'r4delay3','R4 macro delay 3'),
+        Millis(94,'r4delay4','R4 macro delay 4'),
     ]
 
     field = {f.name: f for f in _fields}
@@ -142,6 +144,7 @@ class WinControls(object):
             return result
 
     def readConfig(self):
+        """Read the current configuration from the device."""
         self.loaded = False
 
         self._waitReady(0x10)
@@ -157,6 +160,7 @@ class WinControls(object):
             raise RuntimeError("Checksum error reading config")
 
     def writeConfig(self):
+        """Write the current configuration to the device."""
         configRaw = self._generateConfig()
 
         self._waitReady(0x20)
@@ -172,6 +176,7 @@ class WinControls(object):
             raise RuntimeError("Checksum error writing config")
 
     def setConfig(self, config):
+        """Update the configuration from a list or newline separated string of key=value pairs"""
         if type(config) == str:
             config = config.split("\n")
 
@@ -191,4 +196,5 @@ class WinControls(object):
             self.field[key].set(value)
 
     def dump(self):
+        """Return the current configuration as a string"""
         return "\n".join(map(str, self._fields))

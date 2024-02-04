@@ -1,6 +1,7 @@
 import struct
 
 class KeyCodes:
+    """Keycode mapping for the GPD Win controls. This is the same as the standard usb hid keycodes, up to RIGHTMETA/0xe7. After that are custom codes for the mouse buttons and wheel."""
     code = {
         "NONE": 0x00,
 
@@ -177,9 +178,11 @@ class KeyCodes:
     key = {v:k for k,v in code.items()}
 
 class Setting:
-    def __init__(self, offset, name):
+    """Base class for configuration settings."""
+    def __init__(self, offset, name, description):
         self.offset = offset
         self.name = name
+        self.description = description
         self._values = 0,
 
     # Single value getter and setter
@@ -200,23 +203,33 @@ class Setting:
     def __repr__(self):
         return f"{self.name}={self.get()}"
 
+    def help(self):
+        return f"{self.description} : {self.__doc__}"
+
 class Key(Setting):
+    """A button or control key. Must be a valid keycode."""
     _format = '<H'
     kc = KeyCodes()
 
     def set(self, key: str):
+        key = key.upper()
+        if key not in Key.kc.code:
+            raise RuntimeError(f"Invalid key '{key}'. Must be one of {list(Key.kc.code.keys())}")
         super().set(Key.kc.code[key])
 
     def get(self):
         return Key.kc.key[super().get()]
 
 class Signed(Setting):
+    """Signed 8-bit value for the deadzone and centering offsets. Keep to the range -10 to 10."""
     _format = '<b'
 
 class Millis(Setting):
+    """A macro delay in milliseconds."""
     _format = '<H'
 
 class Rumble(Setting):
+    """The rumble mode. 0=off, 1=low, 2=high."""
     _format = '<B'
 
     def set(self, value):
@@ -225,6 +238,7 @@ class Rumble(Setting):
         super().set(value)
 
 class LedMode(Setting):
+    """(Win4 only) The LED mode. One of off, solid, breathe or rotate."""
     _format = '<B'
 
     code = {'off':0, 'solid':0x01, 'breathe':0x11, 'rotate':0x21}
@@ -241,4 +255,5 @@ class LedMode(Setting):
         return self.mode.get(code, 'off')
 
 class Colour(Setting):
+    """(Win4 only) The LED colour. Currently a 16-bit RGB565 value."""
     _format = "<H"
