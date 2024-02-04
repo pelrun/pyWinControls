@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gpdconfig"
+version = "1.0.0"
+authors = [
+  {name = "James Churchill", email = "pelrun@gmail.com"},
+]
+description = "Configuration tool for GPD Win devices"
+readme = "README.md"
+license = {file = "LICENSE.txt"}
+keywords = ["gpd", "wincontrols"]
+
+[project.urls]
+Homepage = "https://github.com/pelrun/pyWinControls"
+Repository = "https://github.com/pelrun/pyWinControls.git"
+"Bug Tracker" = "https://github.com/pelrun/pyWinControls/issues"
+
+[project.scripts]
+gpdconfig = "gpdconfig.app:main"

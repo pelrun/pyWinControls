@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-import hid
 import struct
 
 from .config import *
+from . import hid
 
 class WinControls(object):
 
