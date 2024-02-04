@@ -10,9 +10,13 @@ authors = [
 ]
 description = "Configuration tool for GPD Win devices"
 readme = "README.md"
-license = {file = "LICENSE.txt"}
 keywords = ["gpd", "wincontrols"]
-
+license = {file = "COPYING"}
+classifiers = [
+  "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python"
+]
 [project.urls]
 Homepage = "https://github.com/pelrun/pyWinControls"
 Repository = "https://github.com/pelrun/pyWinControls.git"
