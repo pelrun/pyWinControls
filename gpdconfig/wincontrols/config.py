@@ -162,6 +162,7 @@ class KeyCodes:
         "LEFTSHIFT": 0xe1,
         "LEFTALT": 0xe2,
         "LEFTMETA": 0xe3,
+
         "RIGHTCTRL": 0xe4,
         "RIGHTSHIFT": 0xe5,
         "RIGHTALT": 0xe6,
@@ -207,7 +208,7 @@ class Setting:
         return f"{self.description} : {self.__doc__}"
 
 class Key(Setting):
-    """A button or control key. Must be a valid keycode."""
+    """A button or trigger. Must be a valid keycode."""
     _format = '<H'
     kc = KeyCodes()
 
@@ -221,11 +222,11 @@ class Key(Setting):
         return Key.kc.key[super().get()]
 
 class Signed(Setting):
-    """Signed 8-bit value for the deadzone and centering offsets. Keep to the range -10 to 10."""
+    """Signed offset for the deadzone and centering settings. Keep to the range -10 to 10."""
     _format = '<b'
 
 class Millis(Setting):
-    """A macro delay in milliseconds."""
+    """A delay in milliseconds."""
     _format = '<H'
 
 class Rumble(Setting):

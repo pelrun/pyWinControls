@@ -37,15 +37,16 @@ def main():
         return
 
     if options.field_help:
-        if options.field_help not in WinControls().field:
+        if options.field_help not in WinControls.field:
             print(f"Unknown field '{options.field_help}'")
             return
-        print(options.field_help, ':', WinControls().field[options.field_help].help())
+        print(f"'{options.field_help}': {WinControls.field[options.field_help].help()}")
         return
 
     #TODO: group types of field together and print them in a more readable way
     if options.fields:
-        print("Available config fields:\n",list(WinControls().field.keys()))
+        for field in WinControls.field:
+            print(f"'{field}': {WinControls.field[field].help()}")
 
     if options.keys:
         print("Available keycodes:\n",list(KeyCodes.code.keys()))
@@ -53,6 +54,7 @@ def main():
     if options.fields or options.keys:
         return
 
+    # Read the current configuration from the device
     wc = WinControls()
 
     if wc.loaded and options.dump:

@@ -1,7 +1,44 @@
-= Python version of GPD WinControls for GPD Win Mini
+# Linux version of GPD WinControls for GPD Win Mini and GPD Win 4
 
-HID commands have been largely reverse-engineered and the config read and write has been implemented.
+A full replacement for WinControls, including features not exposed in the official app.
 
-Requires pyHid 1.05
+Shoulder buttons can be reassigned, and mouse clicks can be put anywhere.
 
-Win 4 support coming.
+Delay between macro keystrokes can be changed arbitrarily, and the fixed 300ms delay after the end of the macro can be changed.
+
+Many more keys can be assigned to buttons, not just ones that are already available.
+
+## Usage:
+
+```
+usage: gpdconfig [-h] [-s FILE] [-d FILE] [-r] [-v] [-c] [-f FIELD] [-k] [config ...]
+
+Configures the mouse-mode controls on GPD Win devices. Replaces the official GPD WinControls app.
+
+positional arguments:
+  config                field=value, set a button or config field to the given value.
+
+options:
+  -h, --help            show this help message and exit
+  -s FILE, --set FILE   Read config from FILE
+  -d FILE, --dump FILE  Dump config to FILE
+  -r, --reset           Reset to defaults
+  -v, --verbose         Output current config to stdout
+
+Informational options:
+  -c, --fields          List available fields
+  -f FIELD, --field-help FIELD
+                        Help for a specific field
+  -k, --keys            List available keycodes
+```
+
+Some or all settings can be changed on the command line or from an input file.
+
+The following fields take keycodes (use '-k' to get a list of all valid keycodes, including mouse buttons):
+`'lu', 'ld', 'll', 'lr', 'du', 'dd', 'dl', 'dr', 'a', 'b', 'x', 'y', 'l1', 'r1', 'l2', 'r2', 'l3', 'r3', 'l41', 'l42', 'l43', 'l44', 'r41', 'r42', 'r43', 'r44'`
+
+The following fields take numbers:
+`'ldead', 'lcent', 'rdead', 'rcent', 'l4delay1', 'l4delay2', 'l4delay3', 'l4delay4', 'r4delay1', 'r4delay2', 'r4delay3', 'r4delay4'`
+
+The following fields take other values:
+`'rumble', 'ledmode', 'colour'`
