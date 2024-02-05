@@ -80,6 +80,7 @@ class WinControls(object):
             self.readConfig()
 
     def _openHid(self):
+        self.device = None
         for dev in hid.enumerate(vid=0x2f24):
             if dev['usage_page'] == 0xff00:
                 #print(dev['path'])
