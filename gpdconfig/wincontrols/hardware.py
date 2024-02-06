@@ -113,15 +113,16 @@ class WinControls(object):
         info = struct.unpack_from("<8xBBBBB11xII", response)
         return {
             'ready': info[0],
-            'firmware': f"X{info[1]:x}{info[2]:02x}K{info[3]:x}{info[4]:02x}",
+            'Xfirmware': f"X{info[1]:x}{info[2]:02x}",
+            'Kfirmware': f"K{info[3]:x}{info[4]:02x}",
             'checksum': info[5]
         }
 
     def _checkDevice(self):
-        supported = ['X510K504', 'X408K407']
+        supported = ['K504', 'K407']
         info = self._parseResponse(self._response)
-        if info['firmware'] not in supported:
-            raise RuntimeError(f"Unsupported firmware version: {info['firmware']}")
+        if info['Kfirmware'] not in supported:
+            raise RuntimeError(f"Unsupported firmware version: {info['Xfirmware']}{info['Kfirmware']}")
 
     def _waitReady(self, id):
         self._response = None
