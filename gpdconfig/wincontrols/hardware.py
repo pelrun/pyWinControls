@@ -5,7 +5,7 @@ import struct
 from .config import *
 from . import hid
 
-class WinControls(object):
+class WinControls():
     """Class for reading and writing configuration to the GPD Win controller hardware."""
 
     # Map of fields and their offsets in the binary configuration
@@ -73,7 +73,8 @@ class WinControls(object):
 
     field = {f.name: f for f in _fields}
 
-    def __init__(self, read=True):
+    def __init__(self, read=True, disableFwCheck=False):
+        self.disableFwCheck = disableFwCheck
         self._openHid()
         self.loaded = False
         if read:
@@ -119,6 +120,8 @@ class WinControls(object):
         }
 
     def _checkDevice(self):
+        if self.disableFwCheck:
+            return
         supported = ['K504', 'K407']
         info = self._parseResponse(self._response)
         if info['Kfirmware'] not in supported:

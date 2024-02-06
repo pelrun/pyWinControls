@@ -22,6 +22,7 @@ def main():
     parser.add_argument("-d","--dump", metavar="FILE", help="Dump config to FILE")
     parser.add_argument("-r","--reset", action="store_true", help="Reset to defaults")
     parser.add_argument("-v","--verbose", action="store_true", help="Output current config to stdout")
+    parser.add_argument("-x","--disable-version-check", dest="fwcheck", action="store_true", help="Disable FW version check")
 
     group = parser.add_argument_group("Informational options")
     group.add_argument("-c","--fields", action="store_true", help="List available fields")
@@ -55,7 +56,7 @@ def main():
         return
 
     # Read the current configuration from the device
-    wc = WinControls()
+    wc = WinControls(disableFwCheck=options.fwcheck)
 
     if wc.loaded and options.dump:
         with open(options.dump,"w") as wf:
