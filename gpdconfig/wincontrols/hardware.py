@@ -3,7 +3,11 @@
 import struct
 
 from .config import *
-from . import hid
+
+try:
+    from . import hid
+except ImportError:
+    import hid
 
 class WinControls():
     """Class for reading and writing configuration to the GPD Win controller hardware."""
