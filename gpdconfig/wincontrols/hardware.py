@@ -178,7 +178,7 @@ class WinControls():
             self._sendReq(0x21,self._cdata(configRaw, block))
 
         self._response = self._sendReq(0x22)
-        if self._parseResponse(self._response)[3] == self._checksum(configRaw):
+        if self._parseResponse(self._response)['checksum'] == self._checksum(configRaw):
             # valid checksum so commit config
             self._sendReq(0x23)
         else:
