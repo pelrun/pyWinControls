@@ -171,7 +171,7 @@ class WinControls():
         self._waitReady(0x20)
 
         for block in range(8):
-            self._sendReq(0x21,self._cdata(block))
+            self._sendReq(0x21,self._cdata(configRaw, block))
 
         self._response = self._sendReq(0x22)
         if self._parseResponse(self._response)[3] == self._checksum(configRaw):
@@ -199,6 +199,8 @@ class WinControls():
                 raise RuntimeError("Invalid config key: %s" % key)
 
             self.field[key].set(value)
+
+        return True
 
     def dump(self):
         """Return the current configuration as a string"""
