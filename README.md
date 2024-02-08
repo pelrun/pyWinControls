@@ -32,7 +32,7 @@ Informational options:
   -k, --keys            List available keycodes
 ```
 
-Some or all settings can be changed on the command line or from an input file.
+One or all settings can be changed on the command line (e.g. `gpdconfig rumble=1`) or from an input file.
 
 The following fields take keycodes (use '-k' to get a list of all valid keycodes, including mouse buttons):
 `'lu', 'ld', 'll', 'lr', 'du', 'dd', 'dl', 'dr', 'a', 'b', 'x', 'y', 'l1', 'r1', 'l2', 'r2', 'l3', 'r3', 'l41', 'l42', 'l43', 'l44', 'r41', 'r42', 'r43', 'r44'`
@@ -41,4 +41,5 @@ The following fields take numbers:
 `'ldead', 'lcent', 'rdead', 'rcent', 'l4delay1', 'l4delay2', 'l4delay3', 'l4delay4', 'r4delay1', 'r4delay2', 'r4delay3', 'r4delay4'`
 
 The following fields take other values:
-`'rumble', 'ledmode', 'colour'`
+`'rumble' (0,1,2) , 'ledmode' (off,solid,breathe,rotate), 'colour' (RRGGBB in hex)`
+
