@@ -22,20 +22,17 @@ This is the joystick configuration (note, wincontrols itself gets Y and right cl
 01 a521 5ade 00 0000 5200 5100 5000 4f00 0400 0500 1b00 1c00 000000000000000000
                      LU   LD   LL   LR   LC   RC
 01 a521 5ade 00 0100 1a00 1600 0400 0700 2c00 1c00 00000000000000000000000000
-                          L1   R1   L2   R2 
+                          L1   R1   L2   R2
 01 a521 5ade 00 0200 0000 ea00 eb00 ec00 ed00 000000000000000000000000000000
 
                      L41  L42  L43  L44  R41  R42  R43
 01 a521 5ade 00 0300 0000 0400 0000 0000 0000 1b00 0000 0000000000000000000000
-                     R44  Rumb LED Colour    LC LB RC RB (signed)
-01 a521 5ade 00 0400 0000 0100 00  0000   00 f7 f7 f7 f7 00000000000000000000000000
+                     R44  Rumb LED R G B  LC LB RC RB (signed)
+01 a521 5ade 00 0400 0000 0100 00  000000 f7 f7 f7 f7 00000000000000000000000000
 
-LED (win4 only):
-lower nybble: 1 on, 2 off
-upper nybble: 0 constant, 1 breathing, 2 rotating
+LED (win4 only): 0=off, 0x01=solid, 0x11=breathe, 0x21=rotate
 
-Colour (win4 only):
-seems like RGB565, but only the high bits actually have an effect?
+Colour (win4 only): RGB888
 
 macro delays here - 4x words per set First set is L4 second set is R4, in milliseconds
 0x0064 is 100 - wincontrols only allows setting 0 or 100

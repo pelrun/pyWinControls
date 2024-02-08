@@ -256,5 +256,13 @@ class LedMode(Setting):
         return self.mode.get(code, 'off')
 
 class Colour(Setting):
-    """(Win4 only) The LED colour. Currently a 16-bit RGB565 value."""
-    _format = "<H"
+    """(Win4 only) The LED colour. Given as a hex string in the format RRGGBB."""
+    _format = "<BBB"
+
+    def set(self, value):
+        if type(value) == str:
+            value = int(value, 16)
+        self._values = (value & 0xff, (value >> 8) & 0xff, (value >> 16) & 0xff)
+
+    def get(self):
+        return f"{self._values[2]:02x}{self._values[1]:02x}{self._values[0]:02x}"
