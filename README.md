@@ -42,3 +42,6 @@ The following fields take numbers:
 
 The following fields take other values:
 `'rumble' (0,1,2) , 'ledmode' (off,solid,breathe,rotate), 'colour' (RRGGBB in hex)`
+
+Have fun!
+- James Churchill pelrun@gmail.com
