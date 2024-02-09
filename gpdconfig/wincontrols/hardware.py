@@ -43,6 +43,11 @@ class WinControls():
         Key(24,'l3','left stick click'),
         Key(26,'r3','right stick click'),
 
+        # start select and menu
+        Key(28,'start','Start button'),
+        Key(30,'select','Select button'),
+        Key(32,'menu','Menu button'),
+
         # macro keys
         Key(50,'l41','L4 macro key 1'),
         Key(52,'l42','L4 macro key 2'),
