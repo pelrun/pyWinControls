@@ -25,3 +25,8 @@ jobs:
     - name: Zipapp
       run: |
         python -m zipapp -p "/usr/bin/env python3" gpdconfig
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.3.1
+      with:
+        name: gpdconfig
+        path: gpdconfig.pyz
