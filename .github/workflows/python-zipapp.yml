@@ -1,0 +1,27 @@
+# This workflow will wrap gpdconfig as a zipapp binary
+
+name: Python application
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: Zipapp
+      run: |
+        python -m zipapp -p "/usr/bin/env python3" gpdconfig
