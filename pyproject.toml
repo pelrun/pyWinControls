@@ -10,6 +10,7 @@ authors = [
 ]
 description = "Configuration tool for GPD Win devices"
 readme = "README.md"
+dependencies = ["hid>=1.0.5"]
 keywords = ["gpd", "wincontrols"]
 license = {file = "COPYING"}
 classifiers = [

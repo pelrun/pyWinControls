@@ -3,3 +3,5 @@ __pycache__
 *.pyz
 *.egg-info
 build/
+dist/
+gpdconfig/wincontrols/hid*
