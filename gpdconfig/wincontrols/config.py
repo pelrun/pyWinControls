@@ -174,6 +174,38 @@ class KeyCodes:
         "MOUSE_RIGHT": 0xeb,
         "MOUSE_MIDDLE": 0xec,
         "MOUSE_FAST": 0xed,
+
+        "DPAD_UP": 0xff01,
+        "DPAD_DOWN": 0xff02,
+        "DPAD_LEFT": 0xff03,
+        "DPAD_RIGHT": 0xff04,
+
+        "BTN_A": 0xff05,
+        "BTN_B": 0xff06,
+        "BTN_X": 0xff07,
+        "BTN_Y": 0xff08,
+
+        "LSTICK_UP": 0xff09,
+        "LSTICK_DOWN": 0xff0a,
+        "LSTICK_LEFT": 0xff0b,
+        "LSTICK_RIGHT": 0xff0c,
+
+        "L3": 0xff0d,
+        "R3": 0xff0e,
+
+        "START": 0xff0f,
+        "SELECT": 0xff10,
+        "MENU": 0xff11,
+
+        "L1": 0xff12,
+        "R1": 0xff13,
+        "L2": 0xff14,
+        "R2": 0xff15,
+
+        "RSTICK_UP": 0xff16,
+        "RSTICK_DOWN": 0xff17,
+        "RSTICK_LEFT": 0xff18,
+        "RSTICK_RIGHT": 0xff19,
     }
 
     key = {v:k for k,v in code.items()}
