@@ -43,5 +43,7 @@ The following fields take numbers:
 The following fields take other values:
 `'rumble' (0,1,2) , 'ledmode' (off,solid,breathe,rotate), 'colour' (RRGGBB in hex)`
 
+The keycodes that reference gamepad keys directly ('DPAD_','LSTICK_','RSTICK','L/R123') unfortunately only appear to work in gamepad mode, and are non-functional in mouse mode.
+
 Have fun!
 - James Churchill pelrun@gmail.com
