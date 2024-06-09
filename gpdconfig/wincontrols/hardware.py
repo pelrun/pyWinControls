@@ -157,19 +157,23 @@ class WinControls():
             #print("Recv: %s" % result.hex())
             return result
 
-    def readConfig(self):
-        """Read the current configuration from the device."""
-        self.loaded = False
-
+    def _readConfig(self):
         self._waitReady(0x10)
 
-        configRaw = bytearray()
+        self._configRaw = bytearray()
         for addr in range(4):
-            configRaw.extend(self._sendReq(0x11,[addr]))
+            self._configRaw.extend(self._sendReq(0x11,[addr]))
 
         self._response = self._sendReq(0x12)
-        if self._parseResponse(self._response)['checksum'] == self._checksum(configRaw):
-            self._parseConfig(configRaw)
+        return self._parseResponse(self._response)['checksum'] == self._checksum(self._configRaw)
+
+    def readConfig(self):
+        """Read the current configuration from the device."""
+
+        self.loaded = False
+
+        if self._readConfig():
+            self._parseConfig(self._configRaw)
         else:
             raise RuntimeError("Checksum error reading config")
 

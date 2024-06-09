@@ -23,6 +23,7 @@ def main():
     parser.add_argument("-r","--reset", action="store_true", help="Reset to defaults")
     parser.add_argument("-v","--verbose", action="store_true", help="Output current config to stdout")
     parser.add_argument("-x","--disable-version-check", dest="fwcheck", action="store_true", help="Disable FW version check")
+    parser.add_argument("-o","--dump-raw", dest="dumpraw", action="store_true", help="Dump raw config data (DEBUG)")
 
     group = parser.add_argument_group("Informational options")
     group.add_argument("-c","--fields", action="store_true", help="List available fields")
@@ -55,6 +56,12 @@ def main():
     if options.fields or options.keys:
         return
 
+    if options.dumpraw:
+        wc = WinControls(read=False,disableFwCheck=options.fwcheck)
+        if wc._readConfig():
+            sys.stdout.buffer.write(wc._configRaw)
+        return
+       
     # Read the current configuration from the device
     wc = WinControls(disableFwCheck=options.fwcheck)
 
