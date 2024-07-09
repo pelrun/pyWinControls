@@ -207,6 +207,7 @@ class WinControls():
             key, value = line.split("=")
 
             key = key.strip().lower()
+            value = value.strip()
 
             if not key in self.field:
                 raise RuntimeError("Invalid config key: %s" % key)
