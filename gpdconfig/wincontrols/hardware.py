@@ -131,7 +131,7 @@ class WinControls():
     def _checkDevice(self):
         if self.disableFwCheck:
             return
-        supported = ['K504', 'K407']
+        supported = ['K504', 'K407', 'K406']
         info = self._parseResponse(self._response)
         if info['Kfirmware'] not in supported:
             raise RuntimeError(f"Unsupported firmware version: {info['Xfirmware']}{info['Kfirmware']}")
