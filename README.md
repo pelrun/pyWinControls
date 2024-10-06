@@ -1,4 +1,4 @@
-# Linux version of GPD WinControls for GPD Win Mini and GPD Win 4
+# Linux version of GPD WinControls for GPD Win Mini, Win 4 and Win Max 2
 
 A full replacement for WinControls, including features not exposed in the official app.
 
@@ -11,7 +11,7 @@ Many more keys can be assigned to buttons, not just ones you can already press.
 ## Usage:
 
 ```
-usage: gpdconfig [-h] [-s FILE] [-d FILE] [-r] [-v] [-c] [-f FIELD] [-k] [config ...]
+usage: gpdconfig [-h] [-s FILE] [-d FILE] [-r] [-v] [-x] [-o] [-c] [-f FIELD] [-k] [config ...]
 
 Configures the mouse-mode controls on GPD Win devices. Replaces the official GPD WinControls app.
 
@@ -24,6 +24,9 @@ options:
   -d FILE, --dump FILE  Dump config to FILE
   -r, --reset           Reset to defaults
   -v, --verbose         Output current config to stdout
+  -x, --disable-version-check
+                        Disable FW version check
+  -o, --dump-raw        Dump raw config data (DEBUG)
 
 Informational options:
   -c, --fields          List available fields
@@ -34,7 +37,7 @@ Informational options:
 
 One or all settings can be changed on the command line (e.g. `gpdconfig ledmode=solid colour=FFFFFF`) or from an input file.
 
-The following fields take keycodes (use '-k' to get a list of all valid keycodes, including mouse buttons):
+The following fields take keycodes (use `-k` to get a list of all valid keycodes, including mouse buttons):
 `'lu', 'ld', 'll', 'lr', 'du', 'dd', 'dl', 'dr', 'a', 'b', 'x', 'y', 'l1', 'r1', 'l2', 'r2', 'l3', 'r3', 'start', 'select', 'menu', 'l41', 'l42', 'l43', 'l44', 'r41', 'r42', 'r43', 'r44'`
 
 The following fields take numbers:
